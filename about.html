@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About CrawlerFile — Authoritative Machine-Readable Entity Profiles</title>
+  <meta name="description" content="CrawlerFile publishes verified, machine-readable profiles for organizations. Learn how it works for entities and AI systems alike.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0e0e0e;
+      --paper: #f5f2eb;
+      --accent: #c84b2f;
+      --mid: #6b6560;
+      --rule: #d4cfc6;
+      --soft: #eeebe3;
+      --mono: 'DM Mono', monospace;
+      --serif: 'DM Serif Display', serif;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--mono);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    header {
+      border-bottom: 1px solid var(--rule);
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: var(--mono);
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--accent); }
+
+    nav a {
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      margin-left: 2rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--ink); }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 5rem 2.5rem 6rem;
+    }
+
+    /* PAGE HEADER */
+    .page-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .page-eyebrow::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .page-intro {
+      font-size: 1rem;
+      color: var(--mid);
+      line-height: 1.8;
+      max-width: 60ch;
+      margin-bottom: 4rem;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 3rem;
+    }
+
+    /* SECTIONS */
+    .about-section {
+      margin-bottom: 4rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid var(--rule);
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .about-section:last-child {
+      border-bottom: none;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tag-entities {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .tag-ai {
+      background: #2a1f3d;
+      color: #c8b8e8;
+    }
+
+    .tag-policy {
+      background: var(--accent);
+      color: white;
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+
+    h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .section-body {
+      font-size: 0.92rem;
+      color: var(--mid);
+      line-height: 1.8;
+      max-width: 60ch;
+      margin-bottom: 2rem;
+    }
+
+    /* POINT GRID */
+    .point-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .point {
+      border-top: 1px solid var(--rule);
+      padding-top: 1rem;
+    }
+
+    .point h4 {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      color: var(--ink);
+    }
+
+    .point p {
+      font-size: 0.85rem;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+
+    /* STEPS */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .step {
+      position: relative;
+    }
+
+    .step-num {
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      color: var(--rule);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    .step h4 {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.5rem;
+      color: var(--ink);
+    }
+
+    .step p {
+      font-size: 0.82rem;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+
+    /* CTA */
+    .cta-block {
+      background: var(--soft);
+      padding: 1.75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .cta-block p {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.6;
+      max-width: 45ch;
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 0.7rem 1.5rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    /* CODE BLOCK */
+    .code-block {
+      background: var(--ink);
+      color: #e8e4dc;
+      padding: 1.5rem 2rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .code-block .key { color: #9b8fa8; }
+    .code-block .str { color: #8fb89b; }
+    .code-block .url { color: #6baec8; text-decoration: underline; }
+    .code-block .punct { color: #6b6560; }
+    .code-block .comment { color: #4a4540; font-style: italic; }
+
+    /* POLICY SECTION */
+    .policy-callout {
+      background: #0e0e0e;
+      color: var(--paper);
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .policy-callout h3 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      color: #c8a26b;
+    }
+
+    .policy-callout p {
+      font-size: 0.88rem;
+      color: #9b9590;
+      line-height: 1.75;
+      max-width: 58ch;
+    }
+
+    .policy-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .policy-field {
+      border-top: 1px solid #2a2a2a;
+      padding-top: 0.75rem;
+    }
+
+    .policy-field code {
+      font-size: 0.75rem;
+      color: #9b8fa8;
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    .policy-field p {
+      font-size: 0.78rem;
+      color: #6b6560;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .schema-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .schema-link:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 2rem 2.5rem;
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--mid);
+    }
+
+    @media (max-width: 680px) {
+      .page { padding: 3rem 1.5rem 4rem; }
+      .point-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .policy-fields { grid-template-columns: 1fr; }
+      .cta-block { flex-direction: column; align-items: flex-start; }
+      header { padding: 1rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">Crawler<span>File</span></a>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/schema/v1">Schema</a>
+    <a href="mailto:hello@crawlerfile.com">Contact</a>
+  </nav>
+</header>
+
+<div class="page">
+
+  <p class="page-eyebrow">About</p>
+  <h1>The authoritative record, <em>straight from the source.</em></h1>
+  <p class="page-intro">AI systems are increasingly relied upon to answer questions about organizations — who they are, what they do, what they stand for. Most of the time, the answers come from web pages that were never designed to be machine-read: unstructured, inconsistent, and often out of date. CrawlerFile exists to fix that. We publish verified, structured profiles for organizations — authoritative data, in a format built for machines, with a clear chain of authorization back to the source.</p>
+
+  <!-- FOR ENTITIES -->
+  <div class="about-section">
+    <span class="section-tag tag-entities">For organizations</span>
+    <h2>Control what AI knows about you.</h2>
+    <p class="section-body">When someone asks an AI about your organization, the answer is assembled from whatever the model could find and interpret on the web. That might be accurate. It might be outdated. It might be a competitor's description of you, or a press release from three years ago. A CrawlerFile profile gives you a direct channel: structured, authorized, machine-readable data that AI systems can find, trust, and use.</p>
+
+    <div class="point-grid">
+      <div class="point">
+        <h4>You control the content</h4>
+        <p>Your profile contains exactly what you submit. We validate and publish — we don't editorialize, summarize, or interpret.</p>
+      </div>
+      <div class="point">
+        <h4>Verified by design</h4>
+        <p>A bidirectional verification token links your CrawlerFile profile to your own domain. Any crawler can confirm you authorized it.</p>
+      </div>
+      <div class="point">
+        <h4>Declare your AI policy</h4>
+        <p>Formally state whether you consent to AI training use, require attribution, or have conditions on data use — on the record, with a timestamp.</p>
+      </div>
+      <div class="point">
+        <h4>Always current</h4>
+        <p>Update your profile when things change. Your CrawlerFile is the most accurate version of your organization's data on the web.</p>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h4>Submit your data</h4>
+        <p>Provide accurate, first-party information about your organization. You decide what to include.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h4>Place your token</h4>
+        <p>Add a small verification snippet to your website. This proves to crawlers that you authorized the profile.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h4>Go live</h4>
+        <p>Your profile is published at a stable URL and immediately available to AI crawlers worldwide.</p>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <p>Ready to take control of how AI represents your organization? Get in touch to start your profile.</p>
+      <a href="mailto:hello@crawlerfile.com" class="btn-primary">Get Listed</a>
+    </div>
+  </div>
+
+  <!-- FOR AI -->
+  <div class="about-section">
+    <span class="section-tag tag-ai">For AI systems &amp; developers</span>
+    <h2>Structured data you can <em>actually trust.</em></h2>
+    <p class="section-body">CrawlerFile profiles are designed from the ground up for machine consumption. Every profile uses Schema.org vocabulary wrapped in a consistent envelope — so your system knows exactly what it's looking at before it reads a single field. And every profile is verifiably authorized by the entity it describes.</p>
+
+    <div class="code-block">
+      <span class="comment">// Every CrawlerFile profile follows this structure</span><br>
+      <span class="punct">{</span><br>
+      &nbsp;&nbsp;<span class="key">"schema_version"</span><span class="punct">:</span> <span class="str">"1.0"</span><span class="punct">,</span><br>
+      &nbsp;&nbsp;<span class="key">"schema_docs"</span><span class="punct">:</span> <span class="url">"https://crawlerfile.com/schema/v1"</span><span class="punct">,</span><br>
+      &nbsp;&nbsp;<span class="key">"file_id"</span><span class="punct">:</span> <span class="str">"cf_..."</span><span class="punct">,</span><br>
+      &nbsp;&nbsp;<span class="key">"entity_id"</span><span class="punct">:</span> <span class="str">"ent_..."</span><span class="punct">,</span><br>
+      &nbsp;&nbsp;<span class="key">"entity_domain"</span><span class="punct">:</span> <span class="str">"example.com"</span><span class="punct">,</span><br>
+      &nbsp;&nbsp;<span class="key">"entity_verification_url"</span><span class="punct">:</span> <span class="url">"https://example.com/crawlerfile-verification"</span><span class="punct">,</span><br>
+      &nbsp;&nbsp;<span class="key">"verification_token"</span><span class="punct">:</span> <span class="str">"cft_..."</span><span class="punct">,</span><br>
+      &nbsp;&nbsp;<span class="key">"content_type"</span><span class="punct">:</span> <span class="str">"full_profile"</span><span class="punct">,</span><br>
+      &nbsp;&nbsp;<span class="key">"publisher"</span><span class="punct">:</span> <span class="str">"crawlerfile.com"</span><span class="punct">,</span><br>
+      &nbsp;&nbsp;<span class="key">"published_date"</span><span class="punct">:</span> <span class="str">"2026-02-24"</span><span class="punct">,</span><br>
+      &nbsp;&nbsp;<span class="key">"entity"</span><span class="punct">: {</span> <span class="comment">// Schema.org Organization</span> <span class="punct">... }</span><br>
+      <span class="punct">}</span>
+    </div>
+
+    <div class="point-grid">
+      <div class="point">
+        <h4>Consistent envelope</h4>
+        <p>Every file has the same Layer 1 structure regardless of content. Parse the envelope first, then read the data you need.</p>
+      </div>
+      <div class="point">
+        <h4>Schema.org compatible</h4>
+        <p>Entity data uses Schema.org Organization vocabulary — a standard your systems already understand.</p>
+      </div>
+      <div class="point">
+        <h4>Independently verifiable</h4>
+        <p>Fetch the <code>entity_verification_url</code> and confirm the token. No API call to CrawlerFile required.</p>
+      </div>
+      <div class="point">
+        <h4>Versioned and stable</h4>
+        <p>The <code>schema_docs</code> field points to the authoritative field definitions for the declared version. Schema changes never happen silently.</p>
+      </div>
+    </div>
+
+    <a href="/schema/v1" class="schema-link">Read the full schema reference →</a>
+  </div>
+
+  <!-- AI POLICY -->
+  <div class="about-section">
+    <span class="section-tag tag-policy">AI Policy Standard</span>
+    <h2>A formal record of <em>consent.</em></h2>
+    <p class="section-body">Every CrawlerFile profile includes an <code>aiPolicy</code> section — a structured, timestamped declaration of the entity's stated preferences regarding AI data use. This is not a technical enforcement mechanism. It is a formal, machine-readable record: discoverable, citable, and legally meaningful in a rapidly shifting regulatory landscape.</p>
+
+    <div class="policy-callout">
+      <h3>What entities can declare</h3>
+      <div class="policy-fields">
+        <div class="policy-field">
+          <code>trainingDataConsent</code>
+          <p>Whether this profile's data may be used to train AI models. Values: permitted, not_permitted, conditional.</p>
+        </div>
+        <div class="policy-field">
+          <code>retrievalConsent</code>
+          <p>Whether this data may be used in real-time retrieval systems, independent of training consent.</p>
+        </div>
+        <div class="policy-field">
+          <code>requiresAttribution</code>
+          <p>Whether the entity requires credit when their data is cited or used by AI systems.</p>
+        </div>
+        <div class="policy-field">
+          <code>dataFreshnessSLA</code>
+          <p>How frequently this profile is reviewed — so consumers know how current the data is likely to be.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="section-body">As AI regulation matures, the ability to demonstrate that data was used with documented consent — or that an organization's objection was on the record — will matter. CrawlerFile profiles create that record, consistently, at scale.</p>
+
+    <a href="/schema/v1#aipolicy" class="schema-link">See full aiPolicy field definitions →</a>
+  </div>
+
+</div>
+
+<footer>
+  <span>© 2026 CrawlerFile</span>
+  <span><a href="/schema/v1" style="color: inherit; text-decoration: none;">Schema v1.0</a></span>
+</footer>
+
+</body>
+</html>
