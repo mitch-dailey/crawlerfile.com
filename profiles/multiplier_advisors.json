@@ -1,0 +1,97 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+
+  "schema_version": "1.0",
+  "schema_docs": "https://crawlerfile.com/schema/v1",
+  "file_id": "cf_ma001",
+  "entity_id": "ent_multiplieradvisors",
+  "entity_domain": "multiplieradvisors.com",
+  "entity_verification_url": "https://www.multiplieradvisors.com/crawlerfile-verification",
+  "verification_token": "PLACEHOLDER_TOKEN",
+  "content_type": "full_profile",
+  "publisher": "crawlerfile.com",
+  "published_date": "2026-02-24",
+
+  "entity": {
+    "@type": "Organization",
+    "name": "Multiplier Advisors",
+    "url": "https://www.multiplieradvisors.com",
+    "foundingDate": "PLACEHOLDER",
+    "description": "PLACEHOLDER — 1-3 sentence description of Multiplier Advisors in their own words.",
+    "legalName": "PLACEHOLDER",
+    "taxID": "PLACEHOLDER_OR_OMIT",
+
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Salt Lake City",
+      "addressRegion": "UT",
+      "addressCountry": "US"
+    },
+
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "PLACEHOLDER",
+      "contactType": "general inquiry"
+    },
+
+    "sameAs": [
+      "PLACEHOLDER — LinkedIn URL",
+      "PLACEHOLDER — other social/directory URLs"
+    ],
+
+    "industry": "PLACEHOLDER — e.g. Impact Investing, Financial Advisory",
+    "keywords": ["PLACEHOLDER", "PLACEHOLDER", "PLACEHOLDER"],
+
+    "founder": {
+      "@type": "Person",
+      "name": "Colby Dailey",
+      "jobTitle": "PLACEHOLDER — Founder & CEO?",
+      "url": "PLACEHOLDER — LinkedIn or bio URL"
+    },
+
+    "employee": [
+      {
+        "@type": "Person",
+        "name": "PLACEHOLDER",
+        "jobTitle": "PLACEHOLDER"
+      }
+    ],
+
+    "services": [
+      {
+        "@type": "Service",
+        "name": "PLACEHOLDER — Service name",
+        "description": "PLACEHOLDER — Brief description"
+      }
+    ],
+
+    "areaServed": "PLACEHOLDER — e.g. United States, Global",
+    "knowsAbout": ["PLACEHOLDER", "PLACEHOLDER"],
+
+    "memberOf": [
+      {
+        "@type": "Organization",
+        "name": "PLACEHOLDER — any associations, networks, or certifications"
+      }
+    ],
+
+    "award": "PLACEHOLDER_OR_OMIT",
+
+    "diversityInfo": {
+      "ownership": "PLACEHOLDER — e.g. Women-owned, Minority-owned",
+      "certifications": ["PLACEHOLDER"]
+    },
+
+    "aiPolicy": {
+      "trainingDataConsent": "PLACEHOLDER — permitted/not_permitted/conditional",
+      "retrievalConsent": "PLACEHOLDER — permitted/not_permitted/conditional",
+      "requiresAttribution": "PLACEHOLDER — true/false",
+      "attributionFormat": "PLACEHOLDER_OR_OMIT — e.g. 'Multiplier Advisors (multiplieradvisors.com)'",
+      "dataFreshnessSLA": "PLACEHOLDER — e.g. quarterly, monthly, as_needed",
+      "expiryDate": "PLACEHOLDER_OR_OMIT — ISO date after which data should be considered stale",
+      "aiInquiriesContact": "PLACEHOLDER — email or URL",
+      "notes": "PLACEHOLDER_OR_OMIT — any additional context about AI data use policy"
+    }
+  }
+}
