@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrawlerFile — Authoritative Machine-Readable Entity Profiles</title>
+  <meta name="description" content="CrawlerFile publishes verified, machine-readable profiles for organizations — authoritative data, straight from the source, built for AI.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0e0e0e;
+      --paper: #f5f2eb;
+      --accent: #c84b2f;
+      --mid: #6b6560;
+      --rule: #d4cfc6;
+      --mono: 'DM Mono', monospace;
+      --serif: 'DM Serif Display', serif;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--mono);
+      font-weight: 300;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* subtle grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    /* HEADER */
+    header {
+      border-bottom: 1px solid var(--rule);
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      animation: fadeDown 0.6s ease both;
+    }
+
+    .logo {
+      font-family: var(--mono);
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--accent); }
+
+    nav a {
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      margin-left: 2rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--ink); }
+
+    /* HERO */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 7rem 2.5rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .hero-left { animation: fadeUp 0.8s 0.1s ease both; }
+
+    .eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.75rem;
+      color: var(--ink);
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-body {
+      font-size: 1rem;
+      color: var(--mid);
+      line-height: 1.75;
+      max-width: 42ch;
+      margin-bottom: 2.5rem;
+    }
+
+    .cta-group {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 0.75rem 1.75rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+
+    /* CODE PREVIEW */
+    .hero-right {
+      animation: fadeUp 0.8s 0.25s ease both;
+      position: relative;
+    }
+
+    .code-card {
+      background: var(--ink);
+      color: #e8e4dc;
+      padding: 2rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      line-height: 1.8;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .code-card::before {
+      content: 'crawlerfile.json';
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #2a2a2a;
+    }
+
+    .code-card .key { color: #9b8fa8; }
+    .code-card .str { color: #8fb89b; }
+    .code-card .num { color: #c8a26b; }
+    .code-card .punct { color: #6b6560; }
+
+    .verified-badge {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: var(--accent);
+      color: white;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+    }
+
+    /* DIVIDER */
+    .section-rule {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+      border: none;
+      border-top: 1px solid var(--rule);
+    }
+
+    /* HOW IT WORKS */
+    .how {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2.5rem;
+      animation: fadeUp 0.8s 0.4s ease both;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 3rem;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+    }
+
+    .step-num {
+      font-family: var(--serif);
+      font-size: 3.5rem;
+      color: var(--rule);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .step h3 {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+      font-weight: 400;
+    }
+
+    .step p {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.7;
+    }
+
+    /* WHY */
+    .why {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 5rem 2.5rem;
+      animation: fadeUp 0.8s 0.5s ease both;
+    }
+
+    .why-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .why h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      line-height: 1.1;
+      font-weight: 400;
+    }
+
+    .why h2 em {
+      font-style: italic;
+      color: #9b8fa8;
+    }
+
+    .why-points {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .why-point {
+      border-top: 1px solid #2a2a2a;
+      padding-top: 1.25rem;
+    }
+
+    .why-point h4 {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+      color: #c8a26b;
+    }
+
+    .why-point p {
+      font-size: 0.88rem;
+      color: #9b9590;
+      line-height: 1.65;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 2rem 2.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--mid);
+      letter-spacing: 0.04em;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; padding: 4rem 1.5rem 3rem; gap: 2.5rem; }
+      .steps { grid-template-columns: 1fr; gap: 2rem; }
+      .why-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .why-points { grid-template-columns: 1fr; }
+      header { padding: 1rem 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/" class="logo">Crawler<span>File</span></a>
+    <nav>
+      <a href="/about.html">About</a>
+      <a href="mailto:hello@crawlerfile.com">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-left">
+      <p class="eyebrow">Machine-readable entity data</p>
+      <h1>What AI knows about you should come from <em>you.</em></h1>
+      <p class="hero-body">CrawlerFile publishes verified, structured profiles for organizations — authoritative data, straight from the source, in a format that AI systems can reliably read, trust, and use.</p>
+      <div class="cta-group">
+        <a href="mailto:hello@crawlerfile.com" class="btn-primary">Get Listed</a>
+        <a href="/about.html" class="btn-secondary">Learn How It Works</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="code-card">
+        <div class="verified-badge">✓ Verified</div>
+        <div>
+          <span class="punct">{</span><br>
+          &nbsp;&nbsp;<span class="key">"schema_version"</span><span class="punct">:</span> <span class="str">"1.0"</span><span class="punct">,</span><br>
+          &nbsp;&nbsp;<span class="key">"file_id"</span><span class="punct">:</span> <span class="str">"cf_a3f8b2c1"</span><span class="punct">,</span><br>
+          &nbsp;&nbsp;<span class="key">"entity_id"</span><span class="punct">:</span> <span class="str">"ent_9d4e4f7a"</span><span class="punct">,</span><br>
+          &nbsp;&nbsp;<span class="key">"entity_domain"</span><span class="punct">:</span> <span class="str">"example.com"</span><span class="punct">,</span><br>
+          &nbsp;&nbsp;<span class="key">"verification_token"</span><span class="punct">:</span> <span class="str">"vt_b6e21c8d"</span><span class="punct">,</span><br>
+          &nbsp;&nbsp;<span class="key">"content_type"</span><span class="punct">:</span> <span class="str">"full_profile"</span><span class="punct">,</span><br>
+          &nbsp;&nbsp;<span class="key">"publisher"</span><span class="punct">:</span> <span class="str">"crawlerfile.com"</span><span class="punct">,</span><br>
+          &nbsp;&nbsp;<span class="key">"published_date"</span><span class="punct">:</span> <span class="str">"2026-02-24"</span><span class="punct">,</span><br>
+          &nbsp;&nbsp;<span class="key">"entity"</span><span class="punct">:</span> <span class="punct">{</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"name"</span><span class="punct">:</span> <span class="str">"Example Organization"</span><span class="punct">,</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">"description"</span><span class="punct">:</span> <span class="str">"..."</span><br>
+          &nbsp;&nbsp;<span class="punct">}</span><br>
+          <span class="punct">}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-rule">
+
+  <section class="how">
+    <p class="section-label">How it works</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>You provide the data</h3>
+        <p>Your organization submits accurate, authoritative information about itself — products, people, policies, and more. You control what's published.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>We verify &amp; publish</h3>
+        <p>We validate your submission and publish a structured, machine-readable profile at a stable URL. A verification token links the file back to your domain.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>AI finds the truth</h3>
+        <p>AI crawlers follow the link from your site to your CrawlerFile profile. What they find is accurate, structured, and authorized by you — not scraped and guessed.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="why">
+    <div class="why-inner">
+      <h2>Why this <em>matters</em> now.</h2>
+      <div class="why-points">
+        <div class="why-point">
+          <h4>First-party authority</h4>
+          <p>AI systems increasingly rely on web-scraped data that may be outdated, incomplete, or wrong. CrawlerFile gives organizations a direct channel to supply accurate information.</p>
+        </div>
+        <div class="why-point">
+          <h4>Verified provenance</h4>
+          <p>Every profile includes a bidirectional verification token — linking your CrawlerFile profile to your own domain so crawlers can confirm authorization independently.</p>
+        </div>
+        <div class="why-point">
+          <h4>Built for machines</h4>
+          <p>Structured JSON-LD using Schema.org vocabulary means AI crawlers arrive knowing exactly how to read and process your data — no interpretation required.</p>
+        </div>
+        <div class="why-point">
+          <h4>You stay in control</h4>
+          <p>Update your profile when things change. Your CrawlerFile is always current, always authorized, always yours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 CrawlerFile</span>
+    <span>crawlerfile.com</span>
+  </footer>
+
+</body>
+</html>
