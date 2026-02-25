@@ -1,0 +1,45 @@
+# robots.txt for crawlerfile.com
+# Last updated: 2026-02-24
+
+# Welcome all crawlers including AI training and retrieval crawlers
+User-agent: *
+Allow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Allow: /
+
+# OpenAI
+User-agent: GPTBot
+Allow: /
+
+# Google (search and AI)
+User-agent: Googlebot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Meta
+User-agent: FacebookBot
+Allow: /
+
+# Apple
+User-agent: Applebot
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+# Grok / xAI
+User-agent: Grok
+Allow: /
+
+# Common
+User-agent: Bingbot
+Allow: /
+
+# Sitemap location
+Sitemap: https://crawlerfile.com/sitemap.xml
