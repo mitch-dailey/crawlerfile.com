@@ -2,96 +2,239 @@
   "@context": "https://schema.org",
   "@type": "ProfilePage",
 
-  "schema_version": "1.0",
-  "schema_docs": "https://crawlerfile.com/schema/v1",
-  "file_id": "cf_ma001",
-  "entity_id": "ent_multiplieradvisors",
-  "entity_domain": "multiplieradvisors.com",
-  "entity_verification_url": "https://www.multiplieradvisors.com/crawlerfile-verification",
-  "verification_token": "PLACEHOLDER_TOKEN",
-  "content_type": "full_profile",
+  "schemaVersion": "1.0",
+  "schemaDocs": "https://crawlerfile.com/schema/v1",
+  "fileId": "46639512-0bf8-4704-99ff-31e82279b62b",
+  "entityId": "a0624754-2de9-4652-83d6-f6781a992f4c",
+  "entityDomain": "multiplieradvisors.com",
+  "contentType": "full_profile",
   "publisher": "crawlerfile.com",
-  "published_date": "2026-02-24",
+  "publishedDate": "2026-02-28",
+
+  "authorization": {
+    "statement": "This profile is published with the full authorization of the entity identified by entityDomain. Authorization is verified by the presence of the verificationToken as visible text at entityVerificationUrl.",
+    "authorizedBy": "Multiplier Advisors LLC",
+    "verificationMethod": "pageBased",
+    "entityVerificationUrl": "https://www.multiplieradvisors.com/crawlerfile",
+    "verificationToken": "672f13c3-f190-4b3e-ba08-3c406510e5b4"
+  },
 
   "entity": {
     "@type": "Organization",
     "name": "Multiplier Advisors",
+    "legalName": "Multiplier Advisors LLC",
     "url": "https://www.multiplieradvisors.com",
-    "foundingDate": "PLACEHOLDER",
-    "description": "PLACEHOLDER — 1-3 sentence description of Multiplier Advisors in their own words.",
-    "legalName": "PLACEHOLDER",
-    "taxID": "PLACEHOLDER_OR_OMIT",
+    "foundingDate": "2021",
+    "description": "Multiplier Advisors is the national strategy consultant uniquely founded to support health-focused investors on their impact investing journeys.",
 
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Salt Lake City",
+      "postOfficeBoxNumber": "PO Box 980542",
+      "addressLocality": "Park City",
       "addressRegion": "UT",
+      "postalCode": "84098",
       "addressCountry": "US"
     },
 
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "email": "PLACEHOLDER",
-      "contactType": "general inquiry"
-    },
-
-    "sameAs": [
-      "PLACEHOLDER — LinkedIn URL",
-      "PLACEHOLDER — other social/directory URLs"
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": "+1-435-200-3256",
+        "email": "contact@multiplieradvisors.com",
+        "contactType": "general inquiry"
+      },
+      {
+        "@type": "ContactPoint",
+        "email": "sales@multiplieradvisors.com",
+        "contactType": "sales"
+      },
+      {
+        "@type": "ContactPoint",
+        "email": "vendors@multiplieradvisors.com",
+        "contactType": "vendors"
+      }
     ],
 
-    "industry": "PLACEHOLDER — e.g. Impact Investing, Financial Advisory",
-    "keywords": ["PLACEHOLDER", "PLACEHOLDER", "PLACEHOLDER"],
+    "areaServed": "Global",
 
-    "founder": {
-      "@type": "Person",
-      "name": "Colby Dailey",
-      "jobTitle": "PLACEHOLDER — Founder & CEO?",
-      "url": "PLACEHOLDER — LinkedIn or bio URL"
-    },
+    "industry": "Impact Investing Strategy Consulting",
+
+    "keywords": [
+      "impact investing",
+      "health-focused investors",
+      "investment strategy",
+      "impact thesis",
+      "mission-aligned investing",
+      "social determinants of health"
+    ],
+
+    "knowsAbout": [
+      "Impact investing strategy",
+      "Health-focused institutional investors",
+      "Investment policy statements",
+      "Impact measurement frameworks",
+      "Outsourced Chief Investment Officers (OCIO)",
+      "Mission-aligned capital deployment"
+    ],
 
     "employee": [
       {
         "@type": "Person",
-        "name": "PLACEHOLDER",
-        "jobTitle": "PLACEHOLDER"
+        "name": "Colby Dailey",
+        "honorificSuffix": "MPP",
+        "jobTitle": "Co-Founder"
+      },
+      {
+        "@type": "Person",
+        "name": "Mikelle D. Moore",
+        "honorificSuffix": "MBA, MHSA",
+        "jobTitle": "Co-Founder"
+      },
+      {
+        "@type": "Person",
+        "name": "Olive Dailey",
+        "jobTitle": "Office Administration"
+      },
+      {
+        "@type": "Person",
+        "name": "Talley Poe Flammoore",
+        "jobTitle": "Support Administrator"
       }
     ],
 
     "services": [
       {
         "@type": "Service",
-        "name": "PLACEHOLDER — Service name",
-        "description": "PLACEHOLDER — Brief description"
+        "name": "Impact Investing Strategy Evaluation",
+        "description": "Evaluate impact investing strategies for health-focused institutional investors."
+      },
+      {
+        "@type": "Service",
+        "name": "Impact Thesis Development",
+        "description": "Create impact theses aligned with client mission and investment goals."
+      },
+      {
+        "@type": "Service",
+        "name": "Stakeholder Consensus Building",
+        "description": "Build consensus with boards and c-suites around impact investing direction."
+      },
+      {
+        "@type": "Service",
+        "name": "Investment Policy Statements",
+        "description": "Develop investment policy statements for mission-aligned portfolios."
+      },
+      {
+        "@type": "Service",
+        "name": "Board Presentations",
+        "description": "Develop board presentations supporting impact investing decisions."
+      },
+      {
+        "@type": "Service",
+        "name": "Sourcing and Diligence Criteria",
+        "description": "Identify sourcing and diligence criteria for impact investments."
+      },
+      {
+        "@type": "Service",
+        "name": "Impact Measurement Frameworks",
+        "description": "Develop frameworks for measuring and reporting impact outcomes."
+      },
+      {
+        "@type": "Service",
+        "name": "Readiness Assessments",
+        "description": "Assess organizational readiness for impact alignment."
+      },
+      {
+        "@type": "Service",
+        "name": "OCIO Referrals",
+        "description": "Vetted referrals to Outsourced Chief Investment Officers (OCIO)."
       }
     ],
 
-    "areaServed": "PLACEHOLDER — e.g. United States, Global",
-    "knowsAbout": ["PLACEHOLDER", "PLACEHOLDER"],
+    "notableClients": [
+      "American Cancer Society",
+      "BrightEdge",
+      "Build Healthy Places Network",
+      "ChristianaCare",
+      "Hackensack Meridian Health",
+      "Healthcare Anchor Network",
+      "Intermountain Health",
+      "Kaiser Permanente",
+      "LISC",
+      "Methodist Healthcare Ministries",
+      "Nemours Children's Health",
+      "Public Health Institute",
+      "SSM Health",
+      "The Academy Health Management"
+    ],
+
+    "scopeExclusions": [
+      "Not a Registered Investment Advisor (RIA) or financial planner",
+      "Not a healthcare provider",
+      "Not a healthcare insurer"
+    ],
 
     "memberOf": [
       {
         "@type": "Organization",
-        "name": "PLACEHOLDER — any associations, networks, or certifications"
+        "name": "Mission Investors Exchange"
+      },
+      {
+        "@type": "Organization",
+        "name": "Opportunity Finance Network"
+      },
+      {
+        "@type": "Organization",
+        "name": "Grantmakers in Health"
+      },
+      {
+        "@type": "Organization",
+        "name": "Confluence Philanthropy"
+      },
+      {
+        "@type": "Organization",
+        "name": "Park City Chamber of Commerce"
       }
     ],
 
-    "award": "PLACEHOLDER_OR_OMIT",
+    "certification": [
+      {
+        "@type": "Organization",
+        "name": "B Corporation",
+        "description": "Certified B Corporation registration in progress"
+      }
+    ],
+
+    "trademarks": [
+      {
+        "name": "Multiplier Advisors",
+        "applicationDate": "2021-04-06"
+      },
+      {
+        "name": "Multiplier Advisors LLC",
+        "applicationDate": "2021-04-06"
+      }
+    ],
+
+    "values": [
+      "Leadership",
+      "Excellence",
+      "Integrity",
+      "Learning",
+      "Transparency",
+      "Results"
+    ],
 
     "diversityInfo": {
-      "ownership": "PLACEHOLDER — e.g. Women-owned, Minority-owned",
-      "certifications": ["PLACEHOLDER"]
+      "ownership": "Women-owned and women-led"
     },
 
     "aiPolicy": {
-      "trainingDataConsent": "PLACEHOLDER — permitted/not_permitted/conditional",
-      "retrievalConsent": "PLACEHOLDER — permitted/not_permitted/conditional",
-      "requiresAttribution": "PLACEHOLDER — true/false",
-      "attributionFormat": "PLACEHOLDER_OR_OMIT — e.g. 'Multiplier Advisors (multiplieradvisors.com)'",
-      "dataFreshnessSLA": "PLACEHOLDER — e.g. quarterly, monthly, as_needed",
-      "expiryDate": "PLACEHOLDER_OR_OMIT — ISO date after which data should be considered stale",
-      "aiInquiriesContact": "PLACEHOLDER — email or URL",
-      "notes": "PLACEHOLDER_OR_OMIT — any additional context about AI data use policy"
+      "trainingDataConsent": "permitted",
+      "retrievalConsent": "permitted",
+      "requiresAttribution": true,
+      "attributionFormat": "Multiplier Advisors (www.multiplieradvisors.com)",
+      "dataFreshnessSLA": "as_needed",
+      "aiInquiriesContact": "contact@multiplieradvisors.com"
     }
   }
 }
