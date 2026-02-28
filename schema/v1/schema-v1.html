@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrawlerFile Schema v1.0 — Field Reference</title>
+  <meta name="description" content="Official field definitions for the CrawlerFile schema v1.0. Machine-readable entity profiles published by CrawlerFile.com.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0e0e0e;
+      --paper: #f5f2eb;
+      --accent: #c84b2f;
+      --mid: #6b6560;
+      --rule: #d4cfc6;
+      --soft: #eeebe3;
+      --mono: 'DM Mono', monospace;
+      --serif: 'DM Serif Display', serif;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--mono);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    header {
+      border-bottom: 1px solid var(--rule);
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: var(--mono);
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--accent); }
+
+    nav a {
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      margin-left: 2rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--ink); }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 5rem 2.5rem 6rem;
+    }
+
+    .page-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .page-eyebrow::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+
+    .page-intro {
+      font-size: 0.95rem;
+      color: var(--mid);
+      line-height: 1.75;
+      max-width: 60ch;
+      margin-bottom: 1rem;
+    }
+
+    .version-badge {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--paper);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      margin-bottom: 3rem;
+    }
+
+    /* TOC */
+    .toc {
+      background: var(--soft);
+      border-left: 3px solid var(--accent);
+      padding: 1.5rem 2rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .toc-title {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 0.75rem;
+    }
+
+    .toc a {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--ink);
+      text-decoration: none;
+      padding: 0.2rem 0;
+      transition: color 0.2s;
+    }
+
+    .toc a:hover { color: var(--accent); }
+
+    /* SECTIONS */
+    .schema-section {
+      margin-bottom: 3.5rem;
+    }
+
+    .schema-section h2 {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      padding-top: 1rem;
+    }
+
+    .section-desc {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      max-width: 60ch;
+    }
+
+    /* FIELD TABLE */
+    .field-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .field-table thead tr {
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .field-table th {
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-align: left;
+      padding: 0 1rem 0.75rem 0;
+    }
+
+    .field-table tbody tr {
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .field-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .field-table td {
+      padding: 1rem 1rem 1rem 0;
+      vertical-align: top;
+      font-size: 0.85rem;
+    }
+
+    .field-name {
+      font-weight: 500;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .field-type {
+      color: #9b8fa8;
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }
+
+    .field-req {
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .req-yes { color: var(--accent); }
+    .req-no { color: var(--mid); }
+
+    .field-desc {
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    .field-values {
+      margin-top: 0.4rem;
+      font-size: 0.78rem;
+    }
+
+    .field-values code {
+      background: var(--soft);
+      padding: 0.1rem 0.35rem;
+      margin-right: 0.25rem;
+      display: inline-block;
+      margin-top: 0.2rem;
+    }
+
+    /* NOTES */
+    .schema-note {
+      background: var(--soft);
+      border-left: 3px solid var(--rule);
+      padding: 1rem 1.5rem;
+      margin-top: 1.5rem;
+      font-size: 0.82rem;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+
+    .schema-note strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* VERIFICATION EXPLAINER */
+    .verify-flow {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .verify-step {
+      border: 1px solid var(--rule);
+      padding: 1.25rem;
+    }
+
+    .verify-step-num {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .verify-step p {
+      font-size: 0.82rem;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    hr.section-divider {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 3rem 0;
+    }
+
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 2rem 2.5rem;
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--mid);
+    }
+
+    @media (max-width: 680px) {
+      .page { padding: 3rem 1.5rem 4rem; }
+      .verify-flow { grid-template-columns: 1fr; }
+      .field-table th:nth-child(2),
+      .field-table td:nth-child(2) { display: none; }
+      header { padding: 1rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">Crawler<span>File</span></a>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+  </nav>
+</header>
+
+<div class="page">
+
+  <p class="page-eyebrow">Schema reference</p>
+  <h1>CrawlerFile Schema v1.0</h1>
+  <p class="page-intro">This document defines the fields used in CrawlerFile entity profiles. Every profile published by CrawlerFile.com conforms to this specification. This page is the authoritative definition of all field names, types, permitted values, and intended meanings.</p>
+  <div class="version-badge">Version 1.0 — Published 2026-02-24</div>
+
+  <div class="toc">
+    <p class="toc-title">Contents</p>
+    <a href="#envelope">Layer 1 — Envelope Fields</a>
+    <a href="#entity">Layer 2 — Entity Identity</a>
+    <a href="#aipolicy">Layer 3 — AI Policy</a>
+    <a href="#verification">Verification Protocol</a>
+    <a href="#versioning">Versioning</a>
+  </div>
+
+  <!-- LAYER 1 -->
+  <div class="schema-section" id="envelope">
+    <h2>Layer 1 — Envelope Fields</h2>
+    <p class="section-desc">These fields appear in every CrawlerFile profile regardless of content. They describe the file itself, establish its provenance, and enable verification. All Layer 1 fields are required unless noted.</p>
+
+    <table class="field-table">
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Required</th>
+          <th>Definition</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="field-name">schemaVersion</td>
+          <td class="field-type">string</td>
+          <td class="field-req req-yes">Required</td>
+          <td class="field-desc">The version of the CrawlerFile schema this file conforms to. Used by consumers to parse the file correctly. Current value: <code>"1.0"</code></td>
+        </tr>
+        <tr>
+          <td class="field-name">schemaDocs</td>
+          <td class="field-type">url</td>
+          <td class="field-req req-yes">Required</td>
+          <td class="field-desc">A URL pointing to the authoritative schema definition for the declared <code>schemaVersion</code>. Allows any consumer to look up field definitions without prior knowledge of CrawlerFile. Current value: <code>"https://crawlerfile.com/schema/v1"</code></td>
+        </tr>
+        <tr>
+          <td class="field-name">fileId</td>
+          <td class="field-type">string</td>
+          <td class="field-req req-yes">Required</td>
+          <td class="field-desc">A unique identifier for this specific file. Stable across updates — the same file retains its <code>fileId</code> when its content changes. Format: UUID.</td>
+        </tr>
+        <tr>
+          <td class="field-name">entityId</td>
+          <td class="field-type">string</td>
+          <td class="field-req req-yes">Required</td>
+          <td class="field-desc">A unique identifier for the entity this file describes. Stable regardless of domain changes, rebranding, or acquisition. An entity may have multiple files (different <code>fileId</code> values) but always shares one <code>entityId</code>. Format: UUID.</td>
+        </tr>
+        <tr>
+          <td class="field-name">entityDomain</td>
+          <td class="field-type">string</td>
+          <td class="field-req req-yes">Required</td>
+          <td class="field-desc">The primary registered domain of the entity (e.g. <code>"example.com"</code>). Used as a human-readable identifier and as the root for verification. Does not include protocol or path.</td>
+        </tr>
+        <tr>
+          <td class="field-name">contentType</td>
+          <td class="field-type">enum</td>
+          <td class="field-req req-yes">Required</td>
+          <td class="field-desc">Describes what kind of data this file contains. Allows consumers to identify relevant files without parsing the full content.
+            <div class="field-values">
+              <code>fullProfile</code> — Complete entity profile combining all available sections<br>
+              <code>identity</code> — Basic entity identity only<br>
+              <code>services</code> — Products and services section only<br>
+              <code>people</code> — Leadership and personnel section only<br>
+              <code>policies</code> — Policy declarations only<br>
+              <code>aiPolicy</code> — AI-specific policy declarations only
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="field-name">publisher</td>
+          <td class="field-type">string</td>
+          <td class="field-req req-yes">Required</td>
+          <td class="field-desc">The domain of the platform that published this file. For all files published by CrawlerFile: <code>"crawlerfile.com"</code></td>
+        </tr>
+        <tr>
+          <td class="field-name">publishedDate</td>
+          <td class="field-type">date</td>
+          <td class="field-req req-yes">Required</td>
+          <td class="field-desc">The ISO 8601 date (<code>YYYY-MM-DD</code>) on which this version of the file was published or last updated. Consumers should use this to assess data freshness.</td>
+        </tr>
+        <tr>
+          <td class="field-name">authorization</td>
+          <td class="field-type">object</td>
+          <td class="field-req req-yes">Required</td>
+          <td class="field-desc">An object containing all authorization and verification fields. Consolidating these fields makes the authorization chain explicit and easy for any crawler to locate. Contains the following sub-fields:
+            <div class="field-values">
+              <code>statement</code> — Plain-language declaration of authorization, readable by humans and AI systems<br>
+              <code>authorizedBy</code> — Legal name of the entity that authorized this profile<br>
+              <code>verificationMethod</code> — How authorization can be verified. Enum: <code>pageBased</code>, <code>metaTag</code>, <code>dnsTxt</code><br>
+              <code>entityVerificationUrl</code> — Required when <code>verificationMethod</code> is <code>pageBased</code> or <code>metaTag</code>. Omit for <code>dnsTxt</code>. The URL where the token can be confirmed on the entity's own domain<br>
+              <code>verificationToken</code> — A UUID that appears both in this file and at the verification location on the entity's domain. Its presence in both locations confirms authorization
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- LAYER 2 -->
+  <div class="schema-section" id="entity">
+    <h2>Layer 2 — Entity Identity</h2>
+    <p class="section-desc">Core descriptive fields about the entity. These use <a href="https://schema.org/Organization" target="_blank">Schema.org Organization vocabulary</a> where applicable, extending it with additional fields where needed. All Layer 2 fields are optional — entities publish what is relevant and accurate for them.</p>
+
+    <div class="schema-note">
+      <strong>Schema.org compatibility:</strong> CrawlerFile profiles include <code>"@context": "https://schema.org"</code> and <code>"@type": "Organization"</code> in the entity object. Fields that map directly to Schema.org properties use Schema.org field names. All field names use camelCase throughout.
+    </div>
+
+    <div class="schema-note" style="margin-top: 1rem">
+      <strong>Loose schema by design:</strong> Layer 1 (the envelope) is strictly defined and must be consistent across all profiles for verification and discovery to work. Layers 2 and 3 are intentionally flexible. Entities are encouraged to publish whatever data is accurate and relevant to them, using Schema.org vocabulary where it fits and plain descriptive field names where it does not. AI consumers are well-suited to interpret varied, expressive, human-readable field names and values — rigid field constraints are not required for machine comprehension.
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- AI POLICY -->
+  <div class="schema-section" id="aipolicy">
+    <h2>Layer 3 — AI Policy</h2>
+    <p class="section-desc">The <code>aiPolicy</code> object allows entities to formally declare their policies regarding the use of their data by AI systems. These declarations are timestamped and verifiable. While CrawlerFile cannot guarantee that all AI systems will honor these declarations, their publication creates a formal, machine-readable record of the entity's stated intent.</p>
+
+    <table class="field-table">
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Required</th>
+          <th>Definition</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="field-name">trainingDataConsent</td>
+          <td class="field-type">enum</td>
+          <td class="field-req req-no">Optional</td>
+          <td class="field-desc">Whether the entity permits the contents of this profile to be used as training data for AI/ML models.
+            <div class="field-values">
+              <code>permitted</code> — Unrestricted use for AI training<br>
+              <code>not_permitted</code> — Use for AI training is not authorized<br>
+              <code>conditional</code> — Permitted subject to conditions described in <code>notes</code> or at <code>aiInquiriesContact</code>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="field-name">retrievalConsent</td>
+          <td class="field-type">enum</td>
+          <td class="field-req req-no">Optional</td>
+          <td class="field-desc">Whether the entity permits this profile to be used in real-time retrieval systems (e.g. RAG pipelines, search-augmented AI responses). Distinct from training consent — an entity may permit retrieval but not training.
+            <div class="field-values">
+              <code>permitted</code> — Retrieval use is authorized<br>
+              <code>not_permitted</code> — Retrieval use is not authorized<br>
+              <code>conditional</code> — Permitted subject to conditions
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="field-name">requiresAttribution</td>
+          <td class="field-type">boolean</td>
+          <td class="field-req req-no">Optional</td>
+          <td class="field-desc">Whether the entity requires attribution when its data is used or cited by AI systems. If <code>true</code>, the preferred attribution format should be provided in <code>attributionFormat</code>.</td>
+        </tr>
+        <tr>
+          <td class="field-name">attributionFormat</td>
+          <td class="field-type">string</td>
+          <td class="field-req req-no">Optional</td>
+          <td class="field-desc">The preferred attribution string to use when citing this entity's data. Only meaningful when <code>requiresAttribution</code> is <code>true</code>. Example: <code>"Multiplier Advisors (multiplieradvisors.com)"</code></td>
+        </tr>
+        <tr>
+          <td class="field-name">dataFreshnessSLA</td>
+          <td class="field-type">enum</td>
+          <td class="field-req req-no">Optional</td>
+          <td class="field-desc">How frequently this profile is reviewed and updated by the entity. Consumers can use this to assess whether the data is likely still current.
+            <div class="field-values">
+              <code>realtime</code> — Continuously maintained<br>
+              <code>weekly</code> — Reviewed weekly<br>
+              <code>monthly</code> — Reviewed monthly<br>
+              <code>quarterly</code> — Reviewed quarterly<br>
+              <code>annually</code> — Reviewed annually<br>
+              <code>as_needed</code> — Updated when significant changes occur
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="field-name">expiryDate</td>
+          <td class="field-type">date</td>
+          <td class="field-req req-no">Optional</td>
+          <td class="field-desc">ISO 8601 date after which consumers should treat this profile as potentially stale and seek a more current version. If omitted, the profile does not have a declared expiry.</td>
+        </tr>
+        <tr>
+          <td class="field-name">aiInquiriesContact</td>
+          <td class="field-type">string</td>
+          <td class="field-req req-no">Optional</td>
+          <td class="field-desc">An email address or URL where AI companies, researchers, or developers can direct inquiries about data use permissions for this entity.</td>
+        </tr>
+        <tr>
+          <td class="field-name">notes</td>
+          <td class="field-type">string</td>
+          <td class="field-req req-no">Optional</td>
+          <td class="field-desc">Free-text field for additional context about this entity's AI data use policies, particularly useful when any consent field is set to <code>conditional</code>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- VERIFICATION -->
+  <div class="schema-section" id="verification">
+    <h2>Verification Protocol</h2>
+    <p class="section-desc">The CrawlerFile verification protocol allows any crawler or consumer to independently confirm that the entity named in a profile has authorized its publication — without contacting CrawlerFile directly. Three verification methods are supported, declared in the <code>authorization.verificationMethod</code> field.</p>
+
+    <div class="schema-note" style="margin-bottom: 1.5rem">
+      <strong>pageBased (recommended):</strong> The entity creates a page on their own domain containing the <code>verificationToken</code> as visible text. The <code>entityVerificationUrl</code> points to this page. Any crawler can fetch the page and confirm the token appears there. This is the recommended method — it requires no technical access beyond the ability to add a page, works on any website platform, and creates a human-readable public declaration of authorization.
+    </div>
+
+    <div class="schema-note" style="margin-bottom: 1.5rem">
+      <strong>metaTag:</strong> The entity places the <code>verificationToken</code> as a meta tag in the <code>&lt;head&gt;</code> of a page on their domain. Format: <code>&lt;meta name="crawlerfile-verification" content="[token]"&gt;</code>. The <code>entityVerificationUrl</code> points to the page containing the meta tag, typically the homepage. Requires code injection access on the entity's website platform.
+    </div>
+
+    <div class="schema-note" style="margin-bottom: 1.5rem">
+      <strong>dnsTxt:</strong> The entity adds the <code>verificationToken</code> as a DNS TXT record on their domain. No <code>entityVerificationUrl</code> is needed — the crawler queries DNS for the <code>entityDomain</code> directly. This method is platform-independent and survives website redesigns, but requires access to DNS settings.
+    </div>
+
+    <div class="verify-flow">
+      <div class="verify-step">
+        <p class="verify-step-num">Step 01</p>
+        <p>Read the <code>authorization</code> object from the CrawlerFile profile. Note the <code>verificationMethod</code> and <code>verificationToken</code>.</p>
+      </div>
+      <div class="verify-step">
+        <p class="verify-step-num">Step 02</p>
+        <p>For <code>pageBased</code> or <code>metaTag</code>: fetch the <code>entityVerificationUrl</code>. For <code>dnsTxt</code>: query DNS TXT records for <code>entityDomain</code>.</p>
+      </div>
+      <div class="verify-step">
+        <p class="verify-step-num">Step 03</p>
+        <p>Confirm the <code>verificationToken</code> string appears in the fetched content. If it does, the entity has authorized this profile.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- VERSIONING -->
+  <div class="schema-section" id="versioning">
+    <h2>Versioning</h2>
+    <p class="section-desc">CrawlerFile schema versions are identified by the <code>schema_version</code> field and documented at stable URLs of the form <code>https://crawlerfile.com/schema/v{N}</code>. This page documents v1.0.</p>
+
+    <div class="schema-note">
+      <strong>Backwards compatibility:</strong> Minor updates to an existing version (clarifications, new optional fields) do not change the version number. Breaking changes — renamed required fields, changed enum values, structural changes — always increment the version. Existing files are never retroactively invalidated; older schema versions remain documented at their original URLs.
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>© 2026 CrawlerFile</span>
+  <span>Schema v1.0 — crawlerfile.com/schema/v1</span>
+</footer>
+
+</body>
+</html>
