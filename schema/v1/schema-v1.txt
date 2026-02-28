@@ -1,0 +1,139 @@
+CRAWLERFILE
+HOME ABOUT 
+SCHEMA REFERENCE
+CrawlerFile Schema v1.0
+This document defines the fields used in CrawlerFile entity profiles. Every profile published by CrawlerFile.com conforms to this specification. This page is the authoritative definition of all field names, types, permitted values, and intended meanings.
+VERSION 1.0 — PUBLISHED 2026-02-24
+CONTENTS
+Layer 1 — Envelope Fields
+Layer 2 — Entity Identity
+Layer 3 — AI Policy
+Verification Protocol
+Versioning
+Layer 1 — Envelope Fields
+These fields appear in every CrawlerFile profile regardless of content. They describe the file itself, establish its provenance, and enable verification. All Layer 1 fields are required unless noted.
+FIELD
+TYPE
+REQUIRED
+DEFINITION
+schemaVersion
+string
+REQUIRED
+The version of the CrawlerFile schema this file conforms to. Used by consumers to parse the file correctly. Current value: "1.0"
+schemaDocs
+url
+REQUIRED
+A URL pointing to the authoritative schema definition for the declared schemaVersion. Allows any consumer to look up field definitions without prior knowledge of CrawlerFile. Current value: "https://crawlerfile.com/schema/v1"
+fileId
+string
+REQUIRED
+A unique identifier for this specific file. Stable across updates — the same file retains its fileId when its content changes. Format: UUID.
+entityId
+string
+REQUIRED
+A unique identifier for the entity this file describes. Stable regardless of domain changes, rebranding, or acquisition. An entity may have multiple files (different fileId values) but always shares one entityId. Format: UUID.
+entityDomain
+string
+REQUIRED
+The primary registered domain of the entity (e.g. "example.com"). Used as a human-readable identifier and as the root for verification. Does not include protocol or path.
+contentType
+enum
+REQUIRED
+Describes what kind of data this file contains. Allows consumers to identify relevant files without parsing the full content.
+fullProfile — Complete entity profile combining all available sections
+identity — Basic entity identity only
+services — Products and services section only
+people — Leadership and personnel section only
+policies — Policy declarations only
+aiPolicy — AI-specific policy declarations only 
+publisher
+string
+REQUIRED
+The domain of the platform that published this file. For all files published by CrawlerFile: "crawlerfile.com"
+publishedDate
+date
+REQUIRED
+The ISO 8601 date (YYYY-MM-DD) on which this version of the file was published or last updated. Consumers should use this to assess data freshness.
+authorization
+object
+REQUIRED
+An object containing all authorization and verification fields. Consolidating these fields makes the authorization chain explicit and easy for any crawler to locate. Contains the following sub-fields:
+statement — Plain-language declaration of authorization, readable by humans and AI systems
+authorizedBy — Legal name of the entity that authorized this profile
+verificationMethod — How authorization can be verified. Enum: pageBased, metaTag, dnsTxt
+entityVerificationUrl — Required when verificationMethod is pageBased or metaTag. Omit for dnsTxt. The URL where the token can be confirmed on the entity's own domain
+verificationToken — A UUID that appears both in this file and at the verification location on the entity's domain. Its presence in both locations confirms authorization 
+
+Layer 2 — Entity Identity
+Core descriptive fields about the entity. These use Schema.org Organization vocabulary where applicable, extending it with additional fields where needed. All Layer 2 fields are optional — entities publish what is relevant and accurate for them.
+Schema.org compatibility: CrawlerFile profiles include "@context": "https://schema.org" and "@type": "Organization" in the entity object. Fields that map directly to Schema.org properties use Schema.org field names. All field names use camelCase throughout. 
+Loose schema by design: Layer 1 (the envelope) is strictly defined and must be consistent across all profiles for verification and discovery to work. Layers 2 and 3 are intentionally flexible. Entities are encouraged to publish whatever data is accurate and relevant to them, using Schema.org vocabulary where it fits and plain descriptive field names where it does not. AI consumers are well-suited to interpret varied, expressive, human-readable field names and values — rigid field constraints are not required for machine comprehension. 
+
+Layer 3 — AI Policy
+The aiPolicy object allows entities to formally declare their policies regarding the use of their data by AI systems. These declarations are timestamped and verifiable. While CrawlerFile cannot guarantee that all AI systems will honor these declarations, their publication creates a formal, machine-readable record of the entity's stated intent.
+FIELD
+TYPE
+REQUIRED
+DEFINITION
+trainingDataConsent
+enum
+OPTIONAL
+Whether the entity permits the contents of this profile to be used as training data for AI/ML models.
+permitted — Unrestricted use for AI training
+not_permitted — Use for AI training is not authorized
+conditional — Permitted subject to conditions described in notes or at aiInquiriesContact 
+retrievalConsent
+enum
+OPTIONAL
+Whether the entity permits this profile to be used in real-time retrieval systems (e.g. RAG pipelines, search-augmented AI responses). Distinct from training consent — an entity may permit retrieval but not training.
+permitted — Retrieval use is authorized
+not_permitted — Retrieval use is not authorized
+conditional — Permitted subject to conditions 
+requiresAttribution
+boolean
+OPTIONAL
+Whether the entity requires attribution when its data is used or cited by AI systems. If true, the preferred attribution format should be provided in attributionFormat.
+attributionFormat
+string
+OPTIONAL
+The preferred attribution string to use when citing this entity's data. Only meaningful when requiresAttribution is true. Example: "Multiplier Advisors (multiplieradvisors.com)"
+dataFreshnessSLA
+enum
+OPTIONAL
+How frequently this profile is reviewed and updated by the entity. Consumers can use this to assess whether the data is likely still current.
+realtime — Continuously maintained
+weekly — Reviewed weekly
+monthly — Reviewed monthly
+quarterly — Reviewed quarterly
+annually — Reviewed annually
+as_needed — Updated when significant changes occur 
+expiryDate
+date
+OPTIONAL
+ISO 8601 date after which consumers should treat this profile as potentially stale and seek a more current version. If omitted, the profile does not have a declared expiry.
+aiInquiriesContact
+string
+OPTIONAL
+An email address or URL where AI companies, researchers, or developers can direct inquiries about data use permissions for this entity.
+notes
+string
+OPTIONAL
+Free-text field for additional context about this entity's AI data use policies, particularly useful when any consent field is set to conditional.
+
+Verification Protocol
+The CrawlerFile verification protocol allows any crawler or consumer to independently confirm that the entity named in a profile has authorized its publication — without contacting CrawlerFile directly. Three verification methods are supported, declared in the authorization.verificationMethod field.
+pageBased (recommended): The entity creates a page on their own domain containing the verificationToken as visible text. The entityVerificationUrl points to this page. Any crawler can fetch the page and confirm the token appears there. This is the recommended method — it requires no technical access beyond the ability to add a page, works on any website platform, and creates a human-readable public declaration of authorization. 
+metaTag: The entity places the verificationToken as a meta tag in the <head> of a page on their domain. Format: <meta name="crawlerfile-verification" content="[token]">. The entityVerificationUrl points to the page containing the meta tag, typically the homepage. Requires code injection access on the entity's website platform. 
+dnsTxt: The entity adds the verificationToken as a DNS TXT record on their domain. No entityVerificationUrl is needed — the crawler queries DNS for the entityDomain directly. This method is platform-independent and survives website redesigns, but requires access to DNS settings. 
+STEP 01
+Read the authorization object from the CrawlerFile profile. Note the verificationMethod and verificationToken.
+STEP 02
+For pageBased or metaTag: fetch the entityVerificationUrl. For dnsTxt: query DNS TXT records for entityDomain.
+STEP 03
+Confirm the verificationToken string appears in the fetched content. If it does, the entity has authorized this profile.
+
+Versioning
+CrawlerFile schema versions are identified by the schema_version field and documented at stable URLs of the form https://crawlerfile.com/schema/v{N}. This page documents v1.0.
+Backwards compatibility: Minor updates to an existing version (clarifications, new optional fields) do not change the version number. Breaking changes — renamed required fields, changed enum values, structural changes — always increment the version. Existing files are never retroactively invalidated; older schema versions remain documented at their original URLs. 
+© 2026 CrawlerFile
+Schema v1.0 — crawlerfile.com/schema/v1
