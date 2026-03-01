@@ -7,7 +7,7 @@
   "fileId": "46639512-0bf8-4704-99ff-31e82279b62b",
   "entityId": "a0624754-2de9-4652-83d6-f6781a992f4c",
   "entityDomain": "multiplieradvisors.com",
-  "contentType": "full_profile",
+  "contentType": "fullProfile",
   "publisher": "crawlerfile.com",
   "publishedDate": "2026-02-28",
 
@@ -29,7 +29,7 @@
 
     "address": {
       "@type": "PostalAddress",
-      "postOfficeBoxNumber": "PO Box 980542",
+      "postOfficeBoxNumber": "980542",
       "addressLocality": "Park City",
       "addressRegion": "UT",
       "postalCode": "84098",
