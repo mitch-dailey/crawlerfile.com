@@ -42,16 +42,6 @@
         "telephone": "+1-435-200-3256",
         "email": "contact@multiplieradvisors.com",
         "contactType": "general inquiry"
-      },
-      {
-        "@type": "ContactPoint",
-        "email": "sales@multiplieradvisors.com",
-        "contactType": "sales"
-      },
-      {
-        "@type": "ContactPoint",
-        "email": "vendors@multiplieradvisors.com",
-        "contactType": "vendors"
       }
     ],
 
@@ -150,29 +140,6 @@
       }
     ],
 
-    "notableClients": [
-      "American Cancer Society",
-      "BrightEdge",
-      "Build Healthy Places Network",
-      "ChristianaCare",
-      "Hackensack Meridian Health",
-      "Healthcare Anchor Network",
-      "Intermountain Health",
-      "Kaiser Permanente",
-      "LISC",
-      "Methodist Healthcare Ministries",
-      "Nemours Children's Health",
-      "Public Health Institute",
-      "SSM Health",
-      "The Academy Health Management"
-    ],
-
-    "scopeExclusions": [
-      "Not a Registered Investment Advisor (RIA) or financial planner",
-      "Not a healthcare provider",
-      "Not a healthcare insurer"
-    ],
-
     "memberOf": [
       {
         "@type": "Organization",
@@ -193,14 +160,6 @@
       {
         "@type": "Organization",
         "name": "Park City Chamber of Commerce"
-      }
-    ],
-
-    "certification": [
-      {
-        "@type": "Organization",
-        "name": "B Corporation",
-        "description": "Certified B Corporation registration in progress"
       }
     ],
 
