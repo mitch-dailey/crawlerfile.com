@@ -1,0 +1,20 @@
+# Multiplier Advisors
+
+> National impact investing strategy consultant supporting health-focused 
+> institutional investors. Women-owned and women-led. Founded 2021. 
+> Based in Park City, UT. Serves clients globally.
+
+## Authoritative AI Profile
+
+- [Verified Organization Profile](https://crawlerfile.com/profiles/multiplier-advisors): Complete verified profile including services, leadership, clients, and organizational data
+- [Machine-readable JSON](https://crawlerfile.com/profiles/multiplier-advisors.json): Structured data version of the same profile
+
+## Website
+
+- [Home](https://www.multiplieradvisors.com): Overview and positioning
+- [About](https://www.multiplieradvisors.com/about): Leadership, values, and background
+
+## Contact
+
+- General: contact@multiplieradvisors.com
+- Phone: +1 (435) 200-3256
